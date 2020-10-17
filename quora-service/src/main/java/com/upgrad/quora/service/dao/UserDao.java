@@ -19,28 +19,6 @@ public class UserDao {
         return userEntity;
     }
 
-    public UserEntity getUserbyId(final String userId) {
-        try {
-            return entityManager.createNamedQuery("userByUuid", UserEntity.class).setParameter("uuid", userId)
-                    .getSingleResult();
-        } catch (NoResultException nre) {
-            return null;
-        }
-    }
-
-    public boolean deleteUser(final String uuid){
-        try {
-            entityManager.createNamedQuery("deleteUserByUuid",UserEntity.class).setParameter("uuid", uuid).executeUpdate();
-            entityManager.flush();
-            entityManager.refresh(getUserbyId(uuid));
-
-            return true;
-
-        } catch (Exception e){
-            return false;
-        }
-    }
-
     public UserEntity getUserbyUsername(final String username) {
         try {
             return entityManager.createNamedQuery("userByUsername", UserEntity.class).setParameter("username", username).getSingleResult();

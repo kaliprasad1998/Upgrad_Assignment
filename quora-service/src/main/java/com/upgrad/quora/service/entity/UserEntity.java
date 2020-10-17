@@ -15,9 +15,7 @@ import java.io.Serializable;
 @Table(name = "users")
 @NamedQueries({
                 @NamedQuery(name = "userByUsername", query = "select u from UserEntity u where u.username = :username"),
-                @NamedQuery(name = "userByUuid", query = "select u from UserEntity u where u.uuid = :uuid"),
-                @NamedQuery(name = "deleteUserByUuid", query = "delete from UserEntity u where u.uuid = :uuid"),
-                @NamedQuery(name = "userByEmail", query = "select u from UserEntity u where u.email =:email")
+               @NamedQuery(name = "userByEmail", query = "select u from UserEntity u where u.email =:email")
         }
 )
 public class UserEntity implements Serializable {
@@ -169,7 +167,9 @@ public class UserEntity implements Serializable {
         this.dob = dob;
     }
 
-    public String getRole() { return role; }
+    public String getRole() {
+        return role;
+    }
 
     public void setRole(String role) {
         this.role = role;
