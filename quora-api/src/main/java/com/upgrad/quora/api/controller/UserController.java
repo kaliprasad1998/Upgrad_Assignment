@@ -53,7 +53,7 @@ public class UserController {
     @RequestMapping(method= RequestMethod.POST, path ="/user/signin",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SigninResponse> signin(@RequestHeader("authorization") final String authorization) throws AuthenticationFailedException
     {
-        byte[] decode= Base64.getDecoder().decode(authorization.split("Basic")[1]);
+        byte[] decode= Base64.getDecoder().decode(authorization.split("Basic ")[1]);
        String decodedText=new String(decode);
         String[] decodedarray=decodedText.split(":");
         UserAuthEntity userAuthEntity=signBusinessService.signin(decodedarray[0],decodedarray[1]);
@@ -68,7 +68,7 @@ public class UserController {
     @RequestMapping(method= RequestMethod.POST, path ="/user/signout",produces= MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity<SignoutResponse> signout(@RequestHeader("authorization") final String authorization) throws SignOutRestrictedException
     {
-        String[] bearerToken=authorization.split("Bearer");
+        String[] bearerToken=authorization.split("Bearer ");
     UserEntity userEntity=signBusinessService.signout(bearerToken[1]);
     SignoutResponse signoutResponse=new SignoutResponse();
             signoutResponse.setId(userEntity.getUuid());
