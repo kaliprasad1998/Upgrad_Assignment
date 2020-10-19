@@ -13,8 +13,12 @@ import javax.validation.constraints.Size;
 import java.time.ZonedDateTime;
 
 @Entity
-@Table(name = "Questions")
-
+@Table(name = "question")
+@NamedQueries({
+        @NamedQuery(name = "getAllQuestions", query = "select q from QuestionEntity q"),
+        @NamedQuery(name="getQuestionByID",query = "select q from QuestionEntity q where q.uuid=:uuid"),
+        @NamedQuery(name="getQuestionByUser",query = "select q from QuestionEntity q where q.userEntity=:user"),
+})
 public class QuestionEntity {
 
     @Id
